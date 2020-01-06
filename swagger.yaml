@@ -6,26 +6,63 @@ info:
 servers:
   - url: 'http://localhost:3000/'
 paths:
-  /users:
+  /flights:
     get:
       tags:
-        - "users"
-      summary: "It should send a list of users"
-  /example/{pathParam}:
-    get:
-      tags:
-        - "resource"
+        - "flights"
+      summary: "It should send a list of flights"
       parameters:
-        - name: pathParam
+        - in: query
+          name: departure
+          schema:
+            type: string
+          description: The number of items to skip before starting to collect the result set
+        - in: query
+          name: arrival
+          schema:
+            type: integer
+          description: The numbers of items to return
+    post:
+      tags:
+        - "flights"
+      summary: "It should create a flight"
+  /flights/{flightNumber}:
+    get:
+      tags:
+        - "flights"
+      summary: "It should return the seleted flight"
+      parameters:
+        - name: flightNumber
           in: path
-          description: A variable value passed on the path part of the URL
           required: true
+          description: Enter a number.
           schema:
-            type: string
-          example: value1
-        - name: filter
-          in: query
+            type : integer
+            format: int64
+            minimum: 1
+    put:
+      tags:
+        - "flights"
+      summary: "It should update the seleted flight"
+      parameters:
+        - name: flightNumber
+          in: path
+          required: true
+          description: Enter a number.
           schema:
-            type: string
-          description: A variable value passed on the querystring part of the URL
-      summary: "This is an example to show you a definition of an endpoint"
+            type : integer
+            format: int64
+            minimum: 1
+    delete:
+      tags:
+        - "flights"
+      summary: "It should update the seleted flight"
+      parameters:
+        - name: flightNumber
+          in: path
+          required: true
+          description: Enter a number.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
